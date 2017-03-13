@@ -13,7 +13,7 @@ from __future__ import absolute_import, unicode_literals
 import environ
 
 ROOT_DIR = environ.Path(__file__) - 2  # ({{ cookiecutter.project_slug }}/config/settings/base.py - 3 = {{ cookiecutter.project_slug }}/)
-APPS_DIR = ROOT_DIR.path('{{ cookiecutter.project_slug }}')
+APPS_DIR = ROOT_DIR.path('project')
 
 # Load operating system environment variables and then prepare to use them
 env = environ.Env()
@@ -29,6 +29,9 @@ if READ_DOT_ENV_FILE:
     print('Loading : {}'.format(env_file))
     env.read_env(env_file)
     print('The .env file has been loaded. See base.py for more information')
+
+
+SECRET_KEY = env('DJANGO_SECRET_KEY', default='VerySecretKey')
 
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
