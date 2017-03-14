@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+import os
 import environ
 
-ROOT_DIR = environ.Path(__file__) - 2
-APPS_DIR = ROOT_DIR.path('project')
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+APPS_DIR = os.path.join(PROJECT_DIR, 'apps')
 
 # Load operating system environment variables and then prepare to use them
 env = environ.Env()
@@ -64,7 +65,7 @@ DEBUG = env.bool('DJANGO_DEBUG', False)
 # FIXTURE CONFIGURATION
 # ------------------------------------------------------------------------------
 FIXTURE_DIRS = (
-    str(APPS_DIR.path('fixtures')),
+    os.path.join(PROJECT_DIR, 'fixtures'),
 )
 
 
@@ -106,7 +107,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            str(APPS_DIR.path('templates')),
+            os.path.join(APPS_DIR, 'templates'),
         ],
         'OPTIONS': {
             'debug': DEBUG,
@@ -151,12 +152,12 @@ X_FRAME_OPTIONS = env("X_FRAME_OPTIONS", default="SAMEORIGIN")
 
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
-STATIC_ROOT = str(ROOT_DIR('staticfiles'))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static_root'),
 
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    str(APPS_DIR.path('static')),
+    os.path.join(APPS_DIR, 'static'),
 ]
 
 STATICFILES_FINDERS = [
@@ -167,7 +168,7 @@ STATICFILES_FINDERS = [
 
 # MEDIA CONFIGURATION
 # ------------------------------------------------------------------------------
-MEDIA_ROOT = str(APPS_DIR('media'))
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media'),
 MEDIA_URL = '/media/'
 
 
