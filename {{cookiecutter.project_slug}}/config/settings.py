@@ -15,7 +15,7 @@ if READ_DOT_ENV_FILE:
     # Operating System Environment variables have precedence over variables defined in the .env file,
     # that is to say variables from the .env files will only be used if not defined
     # as environment variables.
-    env_file = str(ROOT_DIR.path('.env'))
+    env_file = os.path.join(PROJECT_DIR, '.env')
     print('Loading : {}'.format(env_file))
     env.read_env(env_file)
     print('The .env file has been loaded. See base.py for more information')
@@ -39,7 +39,7 @@ THIRD_PARTY_APPS = [
     'rest_framework.authtoken',
 ]
 LOCAL_APPS = [
-    'api',
+    'apps.api',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
