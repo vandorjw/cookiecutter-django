@@ -39,7 +39,7 @@ THIRD_PARTY_APPS = [
     'rest_framework.authtoken',
 ]
 LOCAL_APPS = [
-    'project.api.apps.ApiConfig',
+    'api',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -152,7 +152,7 @@ X_FRAME_OPTIONS = env("X_FRAME_OPTIONS", default="SAMEORIGIN")
 
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static_root'),
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static_root')
 
 STATIC_URL = '/static/'
 
@@ -168,7 +168,7 @@ STATICFILES_FINDERS = [
 
 # MEDIA CONFIGURATION
 # ------------------------------------------------------------------------------
-MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media'),
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
