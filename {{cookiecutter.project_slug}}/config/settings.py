@@ -152,13 +152,12 @@ X_FRAME_OPTIONS = env("X_FRAME_OPTIONS", default="SAMEORIGIN")
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static_root')
-
-STATIC_URL = '/static/'
-
+STATIC_HOST = env('DJANGO_STATIC_HOST', default='')
+STATIC_URL = STATIC_HOST + '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [
     os.path.join(APPS_DIR, 'static'),
 ]
-
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -200,7 +199,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-
 {% if cookiecutter.use_celery == 'y' %}
 ########## CELERY
 INSTALLED_APPS += ['project.taskapp.celery.CeleryConfig']
@@ -211,8 +209,6 @@ else:
     CELERY_RESULT_BACKEND = BROKER_URL
 ########## END CELERY
 {% endif %}
-
-
 
 # CACHE CONFIGURATION
 # ------------------------------------------------------------------------------
