@@ -1,8 +1,8 @@
 version: '2'
 
 volumes:
-  postgres_data_local: {}
-  postgres_backup_local: {}
+  postgres_data: {}
+  postgres_backup: {}
 
 services:
   django:{% if cookiecutter.use_celery == 'y' %} &django{% endif %}
@@ -13,9 +13,12 @@ services:
       - postgres
       - redis
     volumes:
-      - .:/app
+      - ./src:/app/src
     environment:
-      - POSTGRES_USER=!!!SET POSTGRES_USER!!!
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres
+      - AUTO_RELOAD=true
+      - DJANGO_SECRET_KEY=DevS3cr3tKey
+      - DJANGO_DEBUG=True
     ports:
       - "8000:8000"
     command: /start.sh
@@ -25,10 +28,8 @@ services:
       context: .
       dockerfile: ./compose/postgres/Dockerfile
     volumes:
-      - postgres_data_local:/var/lib/postgresql/data
-      - postgres_backup_local:/backups
-    environment:
-      - POSTGRES_USER=!!!SET POSTGRES_USER!!!
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_backup:/backups
 {% if cookiecutter.use_celery == 'y' %}
   redis:
     image: redis:3.0
