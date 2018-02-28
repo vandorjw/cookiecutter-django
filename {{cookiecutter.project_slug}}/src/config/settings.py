@@ -90,11 +90,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# MANAGER CONFIGURATION
+# ------------------------------------------------------------------------------
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
+ADMINS = [
+    ("""{{cookiecutter.author_name}}""", '{{cookiecutter.email}}'),
+]
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
+MANAGERS = ADMINS
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = '{{ cookiecutter.timezone }}'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
