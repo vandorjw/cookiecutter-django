@@ -34,7 +34,7 @@ RUN chown pyuser /start-celeryworker.sh
 
 COPY ./src /app/src
 
-RUN chown -R pyuser /app/src
+RUN chown pyuser /app
 
 USER pyuser
 
