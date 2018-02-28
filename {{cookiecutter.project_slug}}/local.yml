@@ -38,8 +38,7 @@ services:
     <<: *django
     depends_on:
       - redis
-      - postgres{% if cookiecutter.use_mailhog == 'y' %}
-      - mailhog{% endif %}
+      - postgres
     ports: []
     command: /start-celeryworker.sh
 
@@ -48,8 +47,7 @@ services:
     <<: *django
     depends_on:
       - redis
-      - postgres{% if cookiecutter.use_mailhog == 'y' %}
-      - mailhog{% endif %}
+      - postgres
     ports: []
     command: /start-celerybeat.sh
 {% endif %}
