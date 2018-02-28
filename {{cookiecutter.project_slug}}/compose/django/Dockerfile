@@ -11,8 +11,7 @@ RUN apk update \
   # CFFI dependencies
   && apk add libffi-dev openssl-dev py-cffi
 
-RUN useradd -c 'pyuser' --home-dir /app -s /bin/bash pyuser
-RUN echo 'pyuser:pyuser' | chpasswd
+RUN addgroup -S pyuser && adduser -S -G pyuser pyuser
 
 RUN pip install pipenv
 
