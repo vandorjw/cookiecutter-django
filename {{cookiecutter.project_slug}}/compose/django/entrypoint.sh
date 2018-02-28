@@ -1,46 +1,50 @@
 #!/bin/sh
 
-#  Exit the script if any statement returns a non-true return value
+# Abort script at first error, when a command exits with non-zero status (except in until or while loops, if-tests, list constructs)
 set -o errexit
-# Fail the pipe if a single item in the pipe fails.
+# Causes a pipeline to return the exit status of the last command in the pipe that returned a non-zero return value.
 set -o pipefail
-# Exit this script if we try to use an uninitialised variable
+# Attempt to use undefined variable outputs error message, and forces an exit
 set -o nounset
+# Export all defined variables
+set -o allexport
 
 cmd="$@"
 
-# This entrypoint is used to play nicely with the current cookiecutter configuration.
-# Since docker-compose relies heavily on environment variables itself for configuration, we'd have to define multiple
-# environment variables just to support cookiecutter out of the box. That makes no sense, so this little entrypoint
-# does all this for us.
-export REDIS_URL=redis://redis:6379
+source /app/.venv/bin/activate
 
-# the official postgres image uses 'postgres' as default user if not set explictly.
-if [ -z "$POSTGRES_USER" ]; then
-    export POSTGRES_USER=postgres
-fi
-
-export DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres:5432/$POSTGRES_USER
-{% if cookiecutter.use_celery == 'y' %}
-export CELERY_BROKER_URL=$REDIS_URL/0
-{% endif %}
-
-postgres_ready() {
+function postgres_ready(){
 python << END
 import sys
 import psycopg2
 try:
-    conn = psycopg2.connect(dbname="$POSTGRES_USER", user="$POSTGRES_USER", password="$POSTGRES_PASSWORD", host="postgres")
+    conn = psycopg2.connect("$DATABASE_URL")
 except psycopg2.OperationalError:
     sys.exit(-1)
 sys.exit(0)
 END
 }
 
-until postgres_ready; do
-  >&2 echo "Postgres is unavailable - sleeping"
-  sleep 1
-done
+if [ -z ${DATABASE_URL} ]; then
+  echo "DATABASE_URL not set, continuing";
+else
+  until postgres_ready; do
+    echo "Postgres cannot be reached..., retrying in 1 second!";
+    sleep 1
+  done
+fi
 
->&2 echo "Postgres is up - continuing..."
-exec $cmd
+
+if [[ -z $cmd ]]; then
+  python manage.py migrate --no-input
+  python manage.py collectstatic --no-input
+  if [ ${AUTO_RELOAD} ]
+  then
+    gunicorn --config=gunicorn.py config.wsgi --reload
+  else
+    gunicorn --config=gunicorn.py config.wsgi
+  fi
+else
+  echo "Running command passed (by the compose file)"
+  exec $cmd
+fi
