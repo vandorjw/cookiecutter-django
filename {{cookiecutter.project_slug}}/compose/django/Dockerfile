@@ -1,8 +1,9 @@
 FROM python:3.6-alpine
 
-ENV PYTHONUNBUFFERED 1
-ENV PIPENV_MAX_DEPTH 1
-ENV PIPENV_VENV_IN_PROJECT True
+ENV PYTHONUNBUFFERED=1
+ENV PIPENV_MAX_DEPTH=1
+ENV PIPENV_VENV_IN_PROJECT=True
+ENV SHELL=/bin/ash
 
 RUN apk update \
   # psycopg2 dependencies
@@ -33,7 +34,7 @@ RUN chown pyuser /start-celeryworker.sh
 
 COPY ./src /app/src
 
-RUN chown -R pyuser /app
+RUN chown -R pyuser /app/src
 
 USER pyuser
 
