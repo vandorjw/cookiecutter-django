@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/ash
 
 # Abort script at first error, when a command exits with non-zero status (except in until or while loops, if-tests, list constructs)
 set -o errexit
@@ -13,7 +13,7 @@ cmd="$@"
 
 source /app/.venv/bin/activate
 
-function postgres_ready(){
+postgres_ready() {
 python << END
 import sys
 import psycopg2
@@ -25,7 +25,7 @@ sys.exit(0)
 END
 }
 
-if [ -z ${DATABASE_URL} ]; then
+if [][ -z ${DATABASE_URL} ]]; then
   echo "DATABASE_URL not set, continuing";
 else
   until postgres_ready; do

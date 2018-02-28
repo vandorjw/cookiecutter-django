@@ -20,8 +20,7 @@ services:
       - DJANGO_SECRET_KEY=DevS3cr3tKey
       - DJANGO_DEBUG=True
     ports:
-      - "8000:8000"
-    command: /start.sh
+      - "5000:5000"
 
   postgres:
     build:
