@@ -1,11 +1,11 @@
 #!/bin/sh
 
+#  Exit the script if any statement returns a non-true return value
 set -o errexit
+# Fail the pipe if a single item in the pipe fails.
 set -o pipefail
-
-# todo: turn on after #1295
-# set -o nounset
-
+# Exit this script if we try to use an uninitialised variable
+set -o nounset
 
 cmd="$@"
 

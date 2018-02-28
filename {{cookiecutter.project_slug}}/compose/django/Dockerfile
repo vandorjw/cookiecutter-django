@@ -20,15 +20,15 @@ COPY Pipfile /app/Pipfile
 COPY Pipfile.lock /app/Pipfile.lock
 RUN cd /app && pipenv install
 
-COPY ./compose/production/django/gunicorn.sh /gunicorn.sh
+COPY ./compose/django/gunicorn.sh /gunicorn.sh
 RUN chmod a+x /gunicorn.sh
 RUN chown pyuser /gunicorn.sh
 
-COPY ./compose/production/django/entrypoint.sh /entrypoint.sh
+COPY ./compose/django/entrypoint.sh /entrypoint.sh
 RUN chmod a+x /entrypoint.sh
 RUN chown pyuser /entrypoint.sh
 
-COPY ./compose/production/django/celery/worker/start.sh /start-celeryworker.sh
+COPY ./compose/django/celery/worker/start.sh /start-celeryworker.sh
 RUN chmod a+x /start-celeryworker.sh
 RUN chown pyuser /start-celeryworker.sh
 
