@@ -1,0 +1,31 @@
+[[source]]
+
+verify_ssl = true
+name = "pypi"
+url = "https://pypi.python.org/simple"
+
+
+[packages]
+
+django = "*"
+celery = {extras = ["redis"]}
+gunicorn = "*"
+dj-database-url = "*"
+django-environ = "*"
+whitenoise = "*"
+gevent = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
+"psycopg2-binary" = "*"
+ipython = "*"
+django-rest-swagger = "*"
+
+
+[requires]
+
+python_version = "3.6"
+
+
+[dev-packages]
+
