@@ -1,13 +1,13 @@
 {
     "project_name": "Project Name",
     "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '_')|replace('-', '_') }}",
-    "author_name": "Daniel Roy Greenfeld",
-    "email": "you@example.com",
+    "author_name": "Joost van Dorp",
+    "email": "joost@vandorp.io",
     "description": "A short description of the project.",
     "version": "0.1.0",
     "timezone": "UTC",
     "use_whitenoise": "y",
-    "use_celery": "n",
+    "use_celery": "y",
     "use_docker": "y",
     "postgresql_version": ["10", "9.6", "9.5", "9.4", "9.3", "9.2"],
     "open_source_license": ["MIT", "BSD", "GPLv3", "Apache Software License 2.0", "Not open source"]
