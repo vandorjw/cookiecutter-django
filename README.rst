@@ -9,27 +9,10 @@ Cookiecutter Django
     :target: https://pyup.io/repos/github/pydanny/cookiecutter-django/
     :alt: Updates
 
-.. image:: https://badges.gitter.im/Join Chat.svg
-    :target: https://gitter.im/pydanny/cookiecutter-django?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-
-.. image:: https://www.codetriage.com/pydanny/cookiecutter-django/badges/users.svg
-    :target: https://www.codetriage.com/pydanny/cookiecutter-django
-    :alt: Code Helpers Badge
-
 Powered by Cookiecutter_, Cookiecutter Django is a framework for jumpstarting
 production-ready Django projects quickly.
 
-* Documentation: https://cookiecutter-django.readthedocs.io/en/latest/
-* See Troubleshooting_ for common errors and obstacles
-* If you have problems with Cookiecutter Django, please open issues_ don't send
-  emails to the maintainers.
-* Need quick professional paid support? Contact `support@cookiecutter.io`_.
-  This includes configuring your servers, fixing bugs, reviewing your code and
-  everything in between.
-
 .. _cookiecutter: https://github.com/audreyr/cookiecutter
-
-.. _Troubleshooting: https://cookiecutter-django.readthedocs.io/en/latest/troubleshooting.html
 
 .. _528: https://github.com/pydanny/cookiecutter-django/issues/528#issuecomment-212650373
 .. _issues: https://github.com/pydanny/cookiecutter-django/issues/new
@@ -41,19 +24,10 @@ Features
 * For Django 2.0
 * Works with Python 3.6
 * Renders Django projects with 100% starting test coverage
-* Twitter Bootstrap_ v4.0.0 (`maintained Foundation fork`_ also available)
 * 12-Factor_ based settings via django-environ_
-* Secure by default. We believe in SSL.
 * Optimized development and production settings
-* Registration via django-allauth_
-* Comes with custom user model ready to go
-* Grunt build for compass and livereload
-* Send emails via Anymail_ (using Mailgun_ by default, but switchable)
 * Media storage using Amazon S3
-* Docker support using docker-compose_ for development and production (using Caddy_ with LetsEncrypt_ support)
-* Procfile_ for deploying to Heroku
-* Instructions for deploying to PythonAnywhere_
-* Run tests with unittest or py.test
+* Docker support using docker-compose_ for development and production
 * Customizable PostgreSQL version
 
 .. _`maintained Foundation fork`: https://github.com/Parbhat/cookiecutter-django-foundation
@@ -64,29 +38,14 @@ Optional Integrations
 
 *These features can be enabled during initial project setup.*
 
-* Serve static files from Amazon S3 or Whitenoise_
+* Serve static files with Whitenoise_
 * Configuration for Celery_
-* Integration with MailHog_ for local email testing
-* Integration with Sentry_ for error logging
-* Integration with Opbeat_ for performance monitoring
 
-.. _Bootstrap: https://github.com/twbs/bootstrap
 .. _django-environ: https://github.com/joke2k/django-environ
 .. _12-Factor: http://12factor.net/
-.. _django-allauth: https://github.com/pennersr/django-allauth
-.. _django-avatar: https://github.com/grantmcconnaughey/django-avatar
-.. _Procfile: https://devcenter.heroku.com/articles/procfile
-.. _Mailgun: http://www.mailgun.com/
 .. _Whitenoise: https://whitenoise.readthedocs.io/
 .. _Celery: http://www.celeryproject.org/
-.. _Anymail: https://github.com/anymail/django-anymail
-.. _MailHog: https://github.com/mailhog/MailHog
-.. _Sentry: https://sentry.io/welcome/
 .. _docker-compose: https://github.com/docker/compose
-.. _Opbeat: https://opbeat.com/
-.. _PythonAnywhere: https://www.pythonanywhere.com/
-.. _Caddy: https://caddyserver.com/
-.. _LetsEncrypt: https://letsencrypt.org/
 
 Constraints
 -----------
@@ -138,7 +97,7 @@ First, get Cookiecutter. Trust me, it's awesome::
 
 Now run it against this repo::
 
-    $ cookiecutter https://github.com/pydanny/cookiecutter-django
+    $ cookiecutter https://github.com/vandorjw/cookiecutter-django
 
 You'll be prompted for some values. Provide them, then a Django project will be created for you.
 
@@ -154,22 +113,13 @@ Answer the prompts with your own desired options_. For example::
     Resolving deltas: 100% (283/283), done.
     project_name [Project Name]: Reddit Clone
     project_slug [reddit_clone]: reddit
-    author_name [Daniel Roy Greenfeld]: Daniel Greenfeld
-    email [you@example.com]: pydanny@gmail.com
+    author_name [Daniel Roy Greenfeld]: Joost VanDorp
+    email [you@example.com]: me@example.com
     description [A short description of the project.]: A reddit clone.
     domain_name [example.com]: myreddit.com
     version [0.1.0]: 0.0.1
     timezone [UTC]: America/Los_Angeles
-    use_whitenoise [y]: n
     use_celery [n]: y
-    use_mailhog [n]: n
-    use_sentry_for_error_reporting [y]: y
-    use_opbeat [n]: y
-    use_pycharm [n]: y
-    windows [n]: n
-    use_docker [y]: n
-    use_heroku [n]: y
-    use_compressor [n]: y
     Select postgresql_version:
     1 - 10
     2 - 9.6
@@ -177,13 +127,6 @@ Answer the prompts with your own desired options_. For example::
     4 - 9.4
     5 - 9.3
     6 - 9.2
-    Choose from 1, 2, 3, 4 [1]: 1
-    Select js_task_runner:
-    1 - Gulp
-    2 - Grunt
-    3 - None
-    Choose from 1, 2, 3, 4 [1]: 1
-    custom_bootstrap_compilation [n]: n
     Select open_source_license:
     1 - MIT
     2 - BSD
@@ -202,7 +145,7 @@ Create a git repo and push it there::
     $ git init
     $ git add .
     $ git commit -m "first awesome commit"
-    $ git remote add origin git@github.com:pydanny/redditclone.git
+    $ git remote add origin git@github.com:vandorjw/redditclone.git
     $ git push -u origin master
 
 Now take a look at your repo. Don't forget to carefully look at the generated README. Awesome, right?
