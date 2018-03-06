@@ -118,10 +118,15 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
-        'DEFAULT_PARSER_CLASSES': (
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
         'rest_framework.parsers.JSONParser',
     ),
     'DEFAULT_THROTTLE_CLASSES': (
@@ -129,9 +134,16 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.UserRateThrottle'
     ),
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '100000/day',
-        'user': '100000/day'
+        'anon': '100/day',
+        'user': '10000/day'
     }
+}
+
+SWAGGER_SETTINGS = {
+    'JSON_EDITOR': False,
+    'VALIDATOR_URL': None,
+    'LOGIN_URL': 'rest_framework:login',
+    'LOGOUT_URL': 'rest_framework:logout',
 }
 
 CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='redis://redis:6379')
