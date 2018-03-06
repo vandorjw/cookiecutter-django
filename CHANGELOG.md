@@ -2,6 +2,18 @@
 All enhancements and patches to Cookiecutter Django will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2018-02-28]
+### Changed
+- Branched of from /pydanny/cookiecutter-django/ (@vandorjw)
+- Added DJANGO_REST_FRAMEWORK
+- Added swagger
+- Removed Caddy in favour of nginx
+- Removed differences between production/local/testing
+- Always use docker
+- Always use entrypoint
+- use pipenv in favour of pip
+- drop support for Windows
+
 ## [2018-02-16]
 ### Changed
 - Upgraded to Django 2.0 (@epicwhale)
