@@ -25,7 +25,7 @@ sys.exit(0)
 END
 }
 
-if [][ -z ${DATABASE_URL} ]]; then
+if [[ -z ${DATABASE_URL} ]]; then
   echo "DATABASE_URL not set, continuing";
 else
   until postgres_ready; do

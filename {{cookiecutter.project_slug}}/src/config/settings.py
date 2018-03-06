@@ -118,9 +118,20 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
-    ]
+    ),
+        'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '100000/day',
+        'user': '100000/day'
+    }
 }
 
 CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='redis://redis:6379')

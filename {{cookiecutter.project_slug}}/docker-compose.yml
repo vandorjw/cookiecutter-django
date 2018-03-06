@@ -19,8 +19,15 @@ services:
       - AUTO_RELOAD=true
       - DJANGO_SECRET_KEY=DevS3cr3tKey
       - DJANGO_DEBUG=True
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/nginx/Dockerfile
+    depends_on:
+      - django
     ports:
-      - "5000:5000"
+      - "0.0.0.0:80:80"
 
   postgres:
     build:

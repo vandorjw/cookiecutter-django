@@ -6,7 +6,7 @@ from kombu import Exchange, Queue
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 
-app = Celery('fot-worker')
+app = Celery('{{cookiecutter.project_name}}')
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
