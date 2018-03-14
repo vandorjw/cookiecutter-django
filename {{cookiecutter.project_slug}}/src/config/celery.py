@@ -28,6 +28,12 @@ app.conf.task_default_queue = 'default'
 app.conf.task_default_exchange = 'default'
 app.conf.task_default_routing_key = 'default'
 
+app.conf.beat_schedule = {
+    'schedule_debug_task': {
+        'task': 'config.celery.debug_task',
+        'schedule': crontab(minute='*/15'),  # Execute every 15 minutes.
+    },
+}
 
 @app.task(bind=True)
 def debug_task(self):

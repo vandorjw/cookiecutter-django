@@ -112,7 +112,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = '/static/'
+WHITENOISE_STATIC_PREFIX = '/static/'
+SCRIPT_NAME = env('SCRIPT_NAME', default='')
+STATIC_URL = SCRIPT_NAME + WHITENOISE_STATIC_PREFIX
 STATIC_ROOT = '/app/staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -140,7 +142,7 @@ REST_FRAMEWORK = {
 }
 
 SWAGGER_SETTINGS = {
-    'JSON_EDITOR': False,
+    'JSON_EDITOR': True,
     'VALIDATOR_URL': None,
     'LOGIN_URL': 'rest_framework:login',
     'LOGOUT_URL': 'rest_framework:logout',

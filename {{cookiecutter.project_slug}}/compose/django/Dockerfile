@@ -32,6 +32,10 @@ COPY ./compose/django/celery/beat/start.sh /start-celerybeat.sh
 RUN chmod a+x /start-celerybeat.sh
 RUN chown pyuser /start-celerybeat.sh
 
+COPY ./compose/django/gunicorn/start.sh /start-gunicorn.sh
+RUN chmod a+x /start-gunicorn.sh
+RUN chown pyuser /start-gunicorn.sh
+
 COPY ./src /app/src
 
 RUN chown pyuser /app
